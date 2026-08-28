@@ -1,0 +1,43 @@
+{
+  // Skema konfigurasi Wrangler — untuk validasi & autocomplete.
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Nama Worker menentukan subdomain workers.dev:
+  // https://romance-engine.azrielspace852.workers.dev
+  "name": "romance-engine",
+
+  // Entry point Worker (format ES Modules, sesuai spesifikasi §2).
+  "main": "src/index.js",
+
+  // Tanggal kompatibilitas runtime Workers.
+  "compatibility_date": "2026-01-01",
+
+  // Aktifkan endpoint default *.workers.dev (domain backend spesifikasi §2).
+  "workers_dev": true,
+
+  // Binding Cloudflare KV — nama binding WAJIB ROMANCE_KV (spesifikasi §2 & §24).
+  "kv_namespaces": [
+    {
+      "binding": "ROMANCE_KV",
+
+      // ============================================================
+      // [UNKNOWN — wajib diisi owner]
+      // Nilai ini spesifik untuk akun Cloudflare Anda dan tidak
+      // dapat ditentukan oleh siapa pun di luar akun tersebut.
+      //
+      // Cara mendapatkan ID yang benar:
+      //   1. Pastikan sudah login:  npx wrangler login
+      //   2. Buat namespace KV:     npx wrangler kv namespaces create ROMANCE_KV
+      //   3. Salin nilai "id" dari output perintah di atas,
+      //      lalu ganti nilai placeholder di bawah ini.
+      //
+      // Contoh output yang diharapkan:
+      //   🌀 Creating namespace with title "romance-engine-ROMANCE_KV"
+      //   ✨ Success!
+      //   Add the following to your configuration file in your kv_namespaces array:
+      //   { binding = "ROMANCE_KV", id = "<2606dbc714334c1384b9d7dfedcd13a3>" }
+      // ============================================================
+      "id": "2606dbc714334c1384b9d7dfedcd13a3"
+    }
+  ]
+}
